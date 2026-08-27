@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  tor-proxy:
-    image: dockage/tor-privoxy:latest
-    container_name: whoisjson-tor-proxy
-    ports:
-      - "8118:8118"
-      - "9050:9050"
-      - "9051:9051"
-    environment:
-      - IP_CHANGE_SECONDS=60
-    restart: unless-stopped
-
   timescaledb:
     image: timescale/timescaledb-ha:pg16
     container_name: whoisjson-timescaledb
@@ -20,7 +9,7 @@ services:
       POSTGRES_USER: whoisjson_user
       POSTGRES_PASSWORD: whoisjson_password
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - timescaledb_data:/var/lib/postgresql/data
     healthcheck:
